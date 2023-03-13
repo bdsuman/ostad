@@ -72,16 +72,11 @@ if (isset($_POST['submit'])) {
 
     fclose($file);
      //set cookie
-     setcookie('username', $name );
- 
+        $domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
+        setcookie('username', $name, time() + (86400 * 30), "/",$domain,true,true);
         $success_msg = ' Successfully Save.';
     }
-        // $person_obj = new Person();
-        // $person_obj->set_name($name);
-        // $person_obj->set_email($email);
-        // $result_msg = $person_obj->person_info();
        
-   
 }
 ?>
 <!doctype html>
@@ -109,7 +104,6 @@ if (isset($_POST['submit'])) {
                     <div class="col-md-6">
                         <h5 class="card-title" style="border-bottom: 1px solid #bfbfbf;">User Registration Form</h5>
                         <?php
-                        // $error ='ok';
                         if (count($error_msg)>0) {
 
                             foreach($error_msg as $msg){
@@ -154,19 +148,44 @@ if (isset($_POST['submit'])) {
                         </form>
                     </div>
                     <div class="col-md-6" style="border-left: 3px solid black;">
-                        <h5 class="card-title" style="border-bottom: 1px solid #bfbfbf;">Show Result</h5>
+                        <h5 class="card-title" style="border-bottom: 1px solid #bfbfbf;">User Registration Information </h5>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Serial</th>
+                                    <th scope="col">Picture</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Password</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                           
                         <?php
-                        if (isset($result_msg)) {
-                            echo <<<result
-                                        <div class="alert alert-success" role="alert">
-                                            <h4 class="alert-heading">Person Information :</h4>
-                                            <p>{$result_msg}</p>
-                                            <hr>
-                                            <p class="mb-0">Task 2: Basic OOP in PHP & Task 3: Superglobal Variables in PHP</p>
-                                        </div>
-                                    result;
+                          $csv_file ='users.csv';
+                          $i = 1;
+                          if (($handle = fopen($csv_file, "r")) !== FALSE) {
+                           
+                         
+                            while ($data = fgetcsv($handle, 1000, ",")) {
+                                    $serial = $i++;
+                                    echo <<<result
+                                                <tr>
+                                                    <th scope="row">{$serial}</th>
+                                                    <td><img  class="img-responsive" alt="Profile Image" src='uploads/{$data[3]}' width='50' height='60'></td>
+                                                    <td>{$data[0]}</td>
+                                                    <td>{$data[1]}</td>
+                                                    <td>{$data[2]}</td>
+                                                </tr>
+                                            result;
+                                }
+                                
+                                fclose($handle);
                         }
                         ?>
+                             
+                             </tbody>
+                        </table>
                     </div>
                 </div>
 
