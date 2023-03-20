@@ -1,0 +1,66 @@
+
+CREATE TABLE `xyz_corp_office`.`employees` (`id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , `age` INT NOT NULL , `salary` INT NOT NULL , `department_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+
+
+
+Use the employees table to answer the following questions:
+=========================================================
+Employees Table Create
+----------------------
+CREATE TABLE `employees` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `age` int(11) NOT NULL,
+  `salary` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL
+)
+
+ALTER TABLE `employees` ADD PRIMARY KEY (`id`);
+
+ALTER TABLE employees AUTO_INCREMENT=1001;
+
+a. Write a query to select all columns and rows from the employees table.
+answer: SELECT * FROM `employees`;
+
+b. Write a query to select only the name and salary columns of all employees with a salary greater than 50000.
+answer: SELECT name,salary FROM `employees` where salary>50000;
+
+c. Write a query to calculate the average salary of all employees.
+answer: SELECT avg(salary) FROM `employees`;
+
+d. Write a query to count the number of employees who work in the "Marketing" department.
+answer:SELECT departments.name as Name,COUNT(employees.department_id) as 'Employee Number'  FROM `employees` join departments on employees.department_id=departments.id where departments.name='Marketing';
+
+e. Write a query to update the salary column of the employee with an id of 1001 to 60000.
+answer: UPDATE `employees` SET `salary` = '60000' WHERE `id` = 1001;
+
+f. Write a query to delete all employees whose salary is less than 30000.
+answer: DELETE FROM `employees` WHERE salary<30000;
+
+ 
+
+
+Use the departments table to answer the following questions:
+=========================================================
+Department Table Create
+----------------------
+CREATE TABLE `departments` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `manager` varchar(255) NOT NULL
+);
+ALTER TABLE `departments`  ADD PRIMARY KEY (`id`);
+
+a. Write a query to select all columns and rows from the departments table.
+answer: SELECT * FROM `departments`
+
+b. Write a query to select only the name and manager columns of the "Finance" department.
+answer: SELECT employees.name as Name,departments.manager as Manager  FROM `employees` join departments on employees.department_id=departments.id where departments.name='Finance';
+
+c. Write a query to calculate the total number of employees in each department.
+answer: SELECT departments.name as Name,COUNT(employees.department_id) as 'Employee Number'  FROM `employees` join departments on employees.department_id=departments.id GROUP by employees.department_id;
+
+d. Write a query to insert a new department called "Research" with a manager named "John Doe".
+answer: INSERT INTO `departments` (`id`, `name`, `manager`) VALUES (NULL, 'Research', 'John Doe');
