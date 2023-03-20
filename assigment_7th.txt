@@ -24,7 +24,7 @@ b. Write a query to select only the name and salary columns of all employees wit
 answer: SELECT name,salary FROM `employees` where salary>50000;
 
 c. Write a query to calculate the average salary of all employees.
-answer: SELECT avg(salary) FROM `employees`;
+answer: SELECT avg(salary) as 'Average Salary' FROM `employees`;
 
 d. Write a query to count the number of employees who work in the "Marketing" department.
 answer:SELECT departments.name as Name,COUNT(employees.department_id) as 'Employee Number'  FROM `employees` join departments on employees.department_id=departments.id where departments.name='Marketing';
