@@ -1,9 +1,5 @@
-
-CREATE TABLE `xyz_corp_office`.`employees` (`id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , `age` INT NOT NULL , `salary` INT NOT NULL , `department_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
-
-
-
-
+//DB CREATE
+CREATE DATABASE xyz_corp_office;
 
 Use the employees table to answer the following questions:
 =========================================================
