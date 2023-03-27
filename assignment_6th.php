@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     if (!empty($email)) {
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $error_msg[]='Valid email address formatting!';
+            $error_msg[]='Invalid email address formatting!';
         }
     }else{
         $error_msg[]='Email is Required';
