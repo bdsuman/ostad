@@ -153,17 +153,21 @@ if (isset($_POST['submit'])) {
                                 unset($_COOKIE['firstname']);
                                 setcookie('firstname', '', time() - 3600, '/'); 
                                 $csv_file ='register_users.csv';
-                              
+                                $user_found = false;
                                 if (($handle = fopen($csv_file, "r")) !== FALSE) {
                                         while ($data = fgetcsv($handle, 1000, ",")) {
                                             if( ($email==$data[2]) && ($password==$data[3])){
+                                                $user_found =true;
                                                 setcookie('firstname',$data[0]);
                                                 header("location:welcome.php");
                                             }
-                                        
-                                    }
+                                        }
                                     
                                     fclose($handle);
+                                }
+
+                                if(!$user_found){
+                                    $login_error_msg[]='Password or Email Does Not Match Record.';
                                 }
                             }
 
