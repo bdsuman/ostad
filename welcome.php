@@ -34,7 +34,7 @@ if(!isset($_COOKIE['firstname']))
     result;
 if(isset($_GET['logout']) && $_GET['logout']==true){
     unset($_COOKIE['firstname']);
-    setcookie('firstname', '', time() - 3600, '/'); 
+    setcookie('firstname', ''); 
     header("location:assignment_8th.php");
 }
 ?>
