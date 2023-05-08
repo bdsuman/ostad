@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BMI Calculator</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			background-image: url('https://images.unsplash.com/photo-1618939291225-8d558ea4369f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+			background-size: cover;
+			background-position: center;
+			font-family: 'Roboto', sans-serif;
+		}
+		form {
+			background-color: rgba(255, 255, 255, 0.8);
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px gray;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin: 50px auto;
+			padding: 20px;
+			width: 400px;
+		}
+		label {
+			font-size: 20px;
+			margin-bottom: 10px;
+		}
+		input[type="number"] {
+			border: none;
+			border-radius: 5px;
+			box-shadow: 0px 0px 5px gray;
+			font-size: 20px;
+			margin-bottom: 20px;
+			padding: 10px;
+			width: 200px;
+		}
+		button {
+			background-color: #007bff;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 0px 0px 5px gray;
+			color: white;
+			cursor: pointer;
+			font-size: 20px;
+			padding: 10px 20px;
+		}
+		.result {
+			background-color: #fff;
+			border-radius: 5px;
+			box-shadow: 0px 0px 5px gray;
+			font-size: 24px;
+			margin-top: 20px;
+			padding: 10px;
+			text-align: center;
+			width: 400px;
+		}
+	</style>
+</head>
+<body>
+	<form>
+		<label for="weightInput">Weight (kg):</label>
+		<input type="number" id="weightInput" required>
+
+		<label for="heightInput">Height (cm):</label>
+		<input type="number" id="heightInput" required>
+
+		<button id="calculateBtn">Calculate BMI</button>
+
+		<div class="result" id="result"></div>
+	</form>
+
+	<script>
+		const calculateBtn = document.getElementById("calculateBtn");
+		const resultDiv = document.getElementById("result");
+
+		calculateBtn.addEventListener("click", (e) => {
+			e.preventDefault();
+			const weight = parseFloat(document.getElementById("weightInput").value);
+			const height = parseFloat(document.getElementById("heightInput").value) / 100; 
+
+			if (isNaN(weight) || isNaN(height) || height <= 0) {
+				resultDiv.innerHTML = "Invalid input. Please enter valid weight and height.";
+			} else {
+				const bmi = weight / (height * height);
+				resultDiv.innerHTML = `Your BMI is ${bmi.toFixed(1)}.`;
+			}
+		});
+	</script>
+</body>
+</html>
